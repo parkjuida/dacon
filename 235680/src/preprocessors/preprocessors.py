@@ -16,11 +16,18 @@ def split_train_valid_test(
     n = len(df)
     train_valid_boundary = int(n * ratio[0])
     valid_test_boundary = int(n * (ratio[0] + ratio[1]))
+
     train_slice = slice(0, train_valid_boundary)
     valid_slice = slice(train_valid_boundary, valid_test_boundary)
-    test_slice = slice(valid_test_boundary)
+    test_slice = slice(valid_test_boundary, n)
 
-    return df[train_slice], df[valid_slice], df[test_slice]
+    train_df = df[train_slice]
+    valid_df = df[valid_slice]
+    test_df = df[test_slice]
+
+    print(f"shape of train, valid, test: {train_df.shape}, {valid_df.shape}, {test_df.shape}")
+
+    return train_df, valid_df, test_df
 
 
 def apply_standard_scale(
