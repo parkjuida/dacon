@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
 import pandas as pd
+import numpy as np
 
 
 def split_train_valid_test(
@@ -43,3 +44,13 @@ def apply_standard_scale(
     scaled_test_df = (test_df - _mean) / _std
 
     return scaled_train_df, scaled_valid_df, scaled_test_df
+
+
+def inverse_standard_scale(
+        train_df: pd.DataFrame,
+        scaled_pred_y: np.array
+):
+    _mean = train_df.mean()
+    _std = train_df.std()
+
+    return (scaled_pred_y * _std + _mean).reshape(-1)
