@@ -1,0 +1,38 @@
+from typing import List, Tuple
+
+import pandas as pd
+
+
+def split_train_valid_test(
+        df: pd.DataFrame, ratio: List[float]
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    if type(ratio) != List:
+        print("ratio should be 3 length list, example: [0.6, 0.3, 0.1]")
+    if len(ratio) != 3:
+        print("ratio length should be 3, example: [0.6, 0.3, 0.1]")
+    if sum(ratio) != 1:
+        print("sum of ration should be 1, example: [0.7, 0.2, 0.1]")
+
+    n = len(df)
+    train_valid_boundary = int(n * ratio[0])
+    valid_test_boundary = int(n * (ratio[0] + ratio[1]))
+    train_slice = slice(0, train_valid_boundary)
+    valid_slice = slice(train_valid_boundary, valid_test_boundary)
+    test_slice = slice(valid_test_boundary)
+
+    return df[train_slice], df[valid_slice], df[test_slice]
+
+
+def apply_standard_scale(
+        train_df: pd.DataFrame,
+        valid_df: pd.DataFrame,
+        test_df: pd.DataFrame,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    _mean = train_df.mean()
+    _std = train_df.std()
+
+    scaled_train_df = (train_df - _mean) / _std
+    scaled_valid_df = (valid_df - _mean) / _std
+    scaled_test_df = (test_df - _mean) / _std
+
+    return scaled_train_df, scaled_valid_df, scaled_test_df
