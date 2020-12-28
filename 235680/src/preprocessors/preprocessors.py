@@ -50,7 +50,12 @@ def inverse_standard_scale(
         train_df: pd.DataFrame,
         scaled_pred_y: np.array
 ):
+    print("inverse")
+    print(train_df.shape, scaled_pred_y.shape)
     _mean = train_df.mean()
     _std = train_df.std()
-
-    return (scaled_pred_y * _std + _mean).reshape(-1)
+    print(_mean)
+    print(_std)
+    print(scaled_pred_y[20:40])
+    print((scaled_pred_y * _std + _mean)[20:40])
+    return scaled_pred_y * _std + _mean
