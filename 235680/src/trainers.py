@@ -1,5 +1,9 @@
+import os
+from datetime import datetime
+
 import tensorflow as tf
 
+from src.loaders.path_loader import get_data_path
 from src.model.loss import pinball_loss
 from src.settings import MAX_EPOCHS
 
@@ -24,5 +28,9 @@ def compile_and_fit_with_pinball_loss(model, window, tau, patience=5):
     history = model.fit(
         window.train, epochs=MAX_EPOCHS, validation_data=window.valid, callbacks=[early_stopping]
     )
+
+    model_save_path = f"{get_data_path()}{os.sep}submission{os.sep}{model.name}{os.sep}{str(datetime.now()).replace(':', '_')}"
+    os.makedirs(model_save_path, exist_ok=True)
+    model.save_weights(model_save_path)
 
     return history

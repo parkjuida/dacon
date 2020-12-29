@@ -46,7 +46,7 @@ class WindowGenerator:
         """
 
     def split_window(self, features):
-        inputs = features[:, self.input_slice, :]
+        inputs = features[:, self.input_slice, :-1]
         labels = features[:, self.labels_slice, :]
 
         if self.label_columns is not None:

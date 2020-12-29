@@ -3,6 +3,8 @@ from typing import List, Tuple
 import pandas as pd
 import numpy as np
 
+from src.preprocessors.add_columns import add_sin_cos_day, add_sin_cos_hour, add_ghi, add_min_max_scaled
+
 
 def split_train_valid_test(
         df: pd.DataFrame, ratio: List[float]
@@ -54,3 +56,20 @@ def inverse_standard_scale(
     _std = train_df.std()
 
     return scaled_pred_y * _std + _mean
+
+
+def do_common_preprocess(
+        df
+):
+    df = add_sin_cos_day(df)
+    df = add_sin_cos_hour(df)
+    df = add_ghi(df)
+    df = add_min_max_scaled(df, "DHI")
+    df = add_min_max_scaled(df, "DNI")
+    df = add_min_max_scaled(df, "GHI")
+    df = add_min_max_scaled(df, "WS")
+    df = add_min_max_scaled(df, "RH")
+    df = add_min_max_scaled(df, "T")
+    df.drop(["Day", "Hour", "Minute"], axis=1, inplace=True)
+
+    return df

@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 
 def add_sin_cos_day(df: pd.DataFrame) -> pd.DataFrame:
@@ -18,5 +18,14 @@ def add_sin_cos_hour(df: pd.DataFrame) -> pd.DataFrame:
 
 def add_ghi(df: pd.DataFrame) -> pd.DataFrame:
     df["GHI"] = df["DHI"] + df["DNI"]
+
+    return df
+
+
+def add_min_max_scaled(df: pd.DataFrame, column_name) -> pd.DataFrame:
+    minimum = min(df[column_name])
+    maximum = max(df[column_name])
+
+    df[f"{column_name}_min_max_scaled"] = (df[column_name] - minimum) / (maximum - minimum)
 
     return df
