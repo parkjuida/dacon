@@ -253,6 +253,10 @@ class ConvolutionVariousSmallReturnOnce(tf.keras.Model):
         self.conv3_1 = tf.keras.layers.Conv1D(32, kernel_size=1, activation="relu")
         self.conv4_1 = tf.keras.layers.Conv1D(32, kernel_size=1, activation="relu")
 
+
+        self.dense2 = tf.keras.layers.Dense(1024, activation="relu")
+        self.dense3 = tf.keras.layers.Dense(512, activation="relu")
+
         self.dense_list = []
         self.output_list = []
         for i in range(1, 10):
@@ -276,6 +280,9 @@ class ConvolutionVariousSmallReturnOnce(tf.keras.Model):
             conv3_model,
             conv4_model,
         ])
+
+        net = self.dense2(net)
+        net = self.dense3(net)
 
         return tf.concat(axis=2, values=[
             output(dense(net)) for dense, output in zip(self.dense_list, self.output_list)
