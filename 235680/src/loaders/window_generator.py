@@ -12,6 +12,7 @@ class WindowGenerator:
         input_width,
         label_width,
         shift,
+        sequence_stride=1,
         label_columns=None
     ):
         self.train_df = train_df
@@ -27,6 +28,7 @@ class WindowGenerator:
         self.input_width = input_width
         self.label_width = label_width
         self.shift = shift
+        self.sequence_stride = sequence_stride
 
         self.total_window_size = input_width + shift
 
@@ -65,7 +67,7 @@ class WindowGenerator:
             data=data,
             targets=None,
             sequence_length=self.total_window_size,
-            sequence_stride=1,
+            sequence_stride=self.sequence_stride,
             shuffle=shuffle,
             batch_size=32,
         )

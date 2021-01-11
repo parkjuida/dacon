@@ -6,7 +6,8 @@ import pandas as pd
 
 from src.loaders.path_loader import get_train_data_path, get_test_data_path, get_data_path
 from src.preprocessors.add_columns import add_ghi, add_sin_cos_day, add_sin_cos_hour
-from src.preprocessors.preprocessors import split_train_valid_test, apply_standard_scale, do_common_preprocess
+from src.preprocessors.preprocessors import split_train_valid_test, apply_standard_scale, do_common_preprocess, \
+    apply_minmax_scale
 from src.settings import TRAIN_VALID_TEST_RATIO
 
 
@@ -27,16 +28,18 @@ def load_submission_data() -> pd.DataFrame:
     return pd.read_csv(f"{get_data_path()}{os.sep}sample_submission.csv")
 
 
-def load_basic_preprocessed_train():
+def load_basic_preprocessed_train(scale="standard"):
     df = load_train_data()
     df = do_common_preprocess(df)
 
     train_df, valid_df, test_df = split_train_valid_test(df, TRAIN_VALID_TEST_RATIO)
+    if scale == "standard":
+        return apply_standard_scale(train_df, valid_df, test_df)
+    else:
+        return apply_minmax_scale(train_df, valid_df, test_df)
 
-    return apply_standard_scale(train_df, valid_df, test_df)
 
-
-def load_basic_preprocessed_predict():
+def load_basic_preprocessed_predict(scale="standard"):
     df = load_train_data()
     df = do_common_preprocess(df)
 
@@ -44,7 +47,10 @@ def load_basic_preprocessed_predict():
     submission_df = do_common_preprocess(submission_df)
 
     train_df, _, _ = split_train_valid_test(df, TRAIN_VALID_TEST_RATIO)
-    _, submission_df, _ = apply_standard_scale(train_df, submission_df, submission_df)
+    if scale == "standard":
+        _, submission_df, _ = apply_standard_scale(train_df, submission_df, submission_df)
+    else:
+        _, submission_df, _ = apply_minmax_scale(train_df, submission_df, submission_df)
     return train_df, submission_df
 
 

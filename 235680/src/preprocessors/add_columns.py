@@ -17,7 +17,7 @@ def add_sin_cos_hour(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def add_ghi(df: pd.DataFrame) -> pd.DataFrame:
-    df["GHI"] = df["DHI"] + df["DNI"]
+    df["GHI"] = df["DHI"] + df["DNI"] * -np.cos(df["Hour"] * (2 * np.pi) / 24)
 
     return df
 
