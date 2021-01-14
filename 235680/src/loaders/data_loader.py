@@ -24,6 +24,11 @@ def load_test_data() -> pd.DataFrame:
     return test_dataset
 
 
+def generate_test_data() -> pd.DataFrame:
+    for i in range(0, 81):
+        yield pd.read_csv(f"{get_test_data_path()}{os.sep}{i}.csv")
+
+
 def load_submission_data() -> pd.DataFrame:
     return pd.read_csv(f"{get_data_path()}{os.sep}sample_submission.csv")
 

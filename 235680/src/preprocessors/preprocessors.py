@@ -49,7 +49,7 @@ def apply_standard_scale(
 
 
 def apply_minmax_scale(
- train_df: pd.DataFrame,
+        train_df: pd.DataFrame,
         valid_df: pd.DataFrame,
         test_df: pd.DataFrame,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -80,11 +80,11 @@ def do_common_preprocess(
     df = add_sin_cos_hour(df)
     df = add_ghi(df)
 
-    df["TARGET_ROLLING_MEAN_3_shift_1"] = df["TARGET"].rolling(3).mean().shift(-1).fillna(0)
-    df["TARGET_ROLLING_MEAN_5_shift_2"] = df["TARGET"].rolling(5).mean().shift(-2).fillna(0)
-    df["TARGET_ROLLING_MEAN_11_shift_5"] = df["TARGET"].rolling(11).mean().shift(-5).fillna(0)
-    df["TARGET_ROLLING_MEAN_23_shift_11"] = df["TARGET"].rolling(23).mean().shift(-11).fillna(0)
-    df["TARGET_ROLLING_MEAN_47_shift_23"] = df["TARGET"].rolling(47).mean().shift(-23).fillna(0)
+    df["TARGET_ROLLING_MEAN_3_shift_1"] = df["TARGET"].rolling(3).mean()
+    df["TARGET_ROLLING_MEAN_5_shift_2"] = df["TARGET"].rolling(5).mean()
+    df["TARGET_ROLLING_MEAN_11_shift_5"] = df["TARGET"].rolling(11).mean()
+    df["TARGET_ROLLING_MEAN_23_shift_11"] = df["TARGET"].rolling(23).mean()
+    df["TARGET_ROLLING_MEAN_47_shift_23"] = df["TARGET"].rolling(47).mean()
     # df["GHI_ANGLE_COS"] = df["GHI"] * df["Hour_cos"]
     # df["GHI_ANGLE_SIN"] = df["GHI"] * df["Hour_sin"]
     #
