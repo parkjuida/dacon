@@ -27,8 +27,6 @@ def split_train_valid_test_for_cv(df, ratio):
              slice(int(length * 0.8), int(length * 1.0))),
             (slice(int(length * 0.5), int(length * 1)), slice(int(length * 0), int(length * 0.3)),
              slice(int(length * 0.3), int(length * 0.5))),
-            (slice(int(length * 0.2), int(length * 1)), slice(int(length * 0), int(length * 0.1)),
-             slice(int(length * 0.1), int(length * 0.2))),
         ]
     }
 
