@@ -22,6 +22,22 @@ def add_ghi(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def add_rolling_mean(df: pd.DataFrame, column, rows) -> pd.DataFrame:
+    df[f"{column}_rolling_mean_{rows}"] = df[column].rolling(rows).mean()
+
+    return df
+
+
+def add_rolling_mean_bulk(df:pd.DataFrame, column) -> pd.DataFrame:
+    df[f"{column}_rolling_mean_4"] = df[column].rolling(4).mean()
+    df[f"{column}_rolling_mean_8"] = df[column].rolling(8).mean()
+    df[f"{column}_rolling_mean_12"] = df[column].rolling(12).mean()
+    df[f"{column}_rolling_mean_24"] = df[column].rolling(24).mean()
+    df[f"{column}_rolling_mean_48"] = df[column].rolling(48).mean()
+
+    return df
+
+
 def add_min_max_scaled(df: pd.DataFrame, column_name) -> pd.DataFrame:
     minimum = min(df[column_name])
     maximum = max(df[column_name])

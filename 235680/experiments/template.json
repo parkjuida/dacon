@@ -1,0 +1,11 @@
+{
+    "columns": [
+        "DHI",
+        "DNI",
+        "WS",
+        "RH",
+        "T"
+    ],
+    "scaler": "minmax",
+    "days": 7
+}
