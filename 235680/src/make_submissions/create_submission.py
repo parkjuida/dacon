@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.loaders.data_loader import generate_test_data, load_test_data, load_test_features
+from src.loaders.data_loader import generate_test_data
 from src.preprocessors.feature_engineering import feature_engineering_lightgbm
 from src.preprocessors.preprocessors import apply_minmax_scale
 
@@ -24,16 +24,17 @@ def create_submission_using_lightgbm_model(selector, bst_1, bst_2, days):
 
 def create_submission_using_cnn_model(selector, cnn, train, days):
     result = []
-    test_data = load_test_data()
-    test_data = feature_engineering_lightgbm(test_data)
-    _, test_data, _ = apply_minmax_scale(train, test_data, test_data)
+    for test_data in generate_test_data():
+        test_data = feature_engineering_lightgbm(test_data)
+        _, submission_df, _ = apply_minmax_scale(train, test_data, test_data)
 
-    test_df = test_data[selector]
-    predict_df = load_test_features(test_df, 48 * days)
-    predict_np = predict_df.reshape(-1, days, 48, test_df.shape[-1])
-    pred_y = cnn.predict(predict_np)
+        submission_data = submission_df[selector]
 
-    return pred_y.reshape(-1)
+        predict_np = submission_data.values.reshape(7, 48, -1)[(7 - days):, :, :].reshape(-1, days, 48,
+                                                                                          submission_data.shape[-1])
+        result.append(cnn.predict(predict_np))
+
+    return np.array(result).reshape(-1)
 
 
 def evaluate_with_submission(q, selector, bst_1, bst_2, days, target_column="TARGET"):
@@ -73,11 +74,11 @@ def evaluate_with_submission_cnn(q, train, cnn, selector, days):
         test_x_df = pd.DataFrame(test_np, columns=train.columns)
         test_y_df = pd.DataFrame(test_y, columns=train.columns)
 
-        test_x_df = test_x_df[selector]
-        test_x = apply_minmax_scale(train, test_x_df, test_x_df)
+        _, test_x, _ = apply_minmax_scale(train, test_x_df, test_x_df)
+        test_x = test_x[selector]
 
-        test_y = test_y_df["ANSWER"].values
-        pred_y = cnn.predict(test_x).reshape(-1)
+        test_y = test_y_df["TARGET"].values
+        pred_y = cnn.predict(test_x.values.reshape(-1, days, 48, test_x.shape[-1])).reshape(-1)
 
         error += np.sum(np.max(q * (test_y - pred_y), (q - 1) * (test_y - pred_y)))
 

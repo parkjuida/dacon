@@ -1,0 +1,42 @@
+{
+    "columns": [
+        "0_RH",
+        "0_T",
+        "0_TARGET",
+        "0_GHI",
+        "0_RH_T",
+        "1_RH",
+        "1_T",
+        "1_TARGET",
+        "1_GHI",
+        "1_RH_T",
+        "2_RH",
+        "2_T",
+        "2_TARGET",
+        "2_GHI",
+        "2_RH_T",
+        "3_TARGET",
+        "3_GHI",
+        "3_RH_T",
+        "3_RH",
+        "3_T"
+    ],
+    "days": 4,
+    "params": {
+        "application": "quantile",
+        "learning_rate": 0.1,
+        "max_depth": 7,
+        "num_leaves": 64,
+        "n_jobs": 17,
+        "seed": 42,
+        "bagging_freq": 100,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "drop_rate": 0.2,
+        "early_stopping_round": 10,
+        "boosting": "dart"
+    },
+    "total_error": 2.438019362705943,
+    "submission": 7.98,
+    "total_submission_error": 1.326696485322599
+}

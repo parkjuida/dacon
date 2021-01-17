@@ -36,7 +36,7 @@
         "early_stopping_round": 10,
         "boosting": "dart"
     },
-    "total_error": 2.388019789392368,
+    "total_error": 2.433505880618889,
     "submission": 7.98,
-    "total_submission_error": 1.7321685792974462
+    "total_submission_error": 1.4238278693221063
 }
