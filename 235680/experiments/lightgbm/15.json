@@ -1,0 +1,42 @@
+{
+    "columns": [
+        "0_TARGET_rolling_mean_4",
+        "0_TARGET_rolling_mean_8",
+        "0_TARGET_rolling_mean_12",
+        "0_TARGET_rolling_mean_24",
+        "0_TARGET_rolling_mean_48",
+        "1_TARGET_rolling_mean_4",
+        "1_TARGET_rolling_mean_8",
+        "1_TARGET_rolling_mean_12",
+        "1_TARGET_rolling_mean_24",
+        "1_TARGET_rolling_mean_48",
+        "2_TARGET_rolling_mean_4",
+        "2_TARGET_rolling_mean_8",
+        "2_TARGET_rolling_mean_12",
+        "2_TARGET_rolling_mean_24",
+        "2_TARGET_rolling_mean_48",
+        "3_TARGET_rolling_mean_4",
+        "3_TARGET_rolling_mean_8",
+        "3_TARGET_rolling_mean_12",
+        "3_TARGET_rolling_mean_24",
+        "3_TARGET_rolling_mean_48"
+    ],
+    "days": 4,
+    "params": {
+        "application": "quantile",
+        "learning_rate": 0.1,
+        "max_depth": 7,
+        "num_leaves": 64,
+        "n_jobs": 17,
+        "seed": 42,
+        "bagging_freq": 100,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "drop_rate": 0.2,
+        "early_stopping_round": 10,
+        "boosting": "dart"
+    },
+    "total_error": 2.388019789392368,
+    "submission": 7.98,
+    "total_submission_error": 1.7321685792974462
+}

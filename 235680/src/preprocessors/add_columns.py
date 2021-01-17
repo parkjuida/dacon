@@ -45,3 +45,10 @@ def add_min_max_scaled(df: pd.DataFrame, column_name) -> pd.DataFrame:
     df[f"{column_name}_min_max_scaled"] = (df[column_name] - minimum) / (maximum - minimum)
 
     return df
+
+
+def add_rh_t(df):
+    df["RH_T"] = df["RH"] * df["T"]
+
+    return df
+

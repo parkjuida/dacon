@@ -50,7 +50,7 @@ def split_x_y_for_lightgbm_train(df, days, target_column="TARGET"):
 
         x.append(tmp[:, :days, :])
         y_1.append(tmp[:, days: days + 1, :])
-        y_2.append(tmp[:, :days + 1:days + 2, :])
+        y_2.append(tmp[:, days + 1:days + 2, :])
 
     x = pd.DataFrame(np.array(x).reshape(-1, feature_shape * days), columns=columns)
     y_1 = pd.DataFrame(np.array(y_1).reshape(-1, feature_shape), columns=df.columns)

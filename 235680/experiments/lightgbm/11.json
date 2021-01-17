@@ -1,0 +1,41 @@
+{
+    "columns": [
+        "0_Day",
+        "0_Hour",
+        "0_GHI",
+        "0_TARGET_rolling_mean_24",
+        "0_TARGET_rolling_mean_48",
+        "1_TARGET",
+        "1_Day_cos",
+        "1_TARGET_rolling_mean_12",
+        "1_TARGET_rolling_mean_24",
+        "1_RH_T",
+        "2_TARGET",
+        "2_Day_sin",
+        "2_TARGET_rolling_mean_24",
+        "3_Day_cos",
+        "3_TARGET_rolling_mean_4",
+        "4_Minute",
+        "4_DNI",
+        "4_T",
+        "4_TARGET_rolling_mean_4",
+        "4_TARGET_rolling_mean_24"
+    ],
+    "days": 5,
+    "params": {
+        "application": "quantile",
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "num_leaves": 8,
+        "n_jobs": 17,
+        "seed": 42,
+        "bagging_freq": 100,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "drop_rate": 0.2,
+        "early_stopping_round": 10,
+        "boosting": "gbdt"
+    },
+    "total_error": 2.2487455789712714,
+    "total_submission_error": 1.3339066907253792
+}

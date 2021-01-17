@@ -142,3 +142,4 @@ cython_debug/
 
 **/**/submission/
 **/submission_history/*
+*.csv
