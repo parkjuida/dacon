@@ -1,0 +1,23 @@
+{
+    "columns": [
+        "DHI",
+        "DNI",
+        "WS",
+        "RH",
+        "T",
+        "TARGET",
+        "GHI",
+        "Hour_sin",
+        "Hour_cos",
+        "TARGET_rolling_mean_4",
+        "TARGET_rolling_mean_8",
+        "TARGET_rolling_mean_12",
+        "TARGET_rolling_mean_24",
+        "TARGET_rolling_mean_48",
+        "RH_T"
+    ],
+    "days": 5,
+    "total_error": 2.29457422097524,
+    "submission": 7.98,
+    "total_submission_error": 2.863020157607533
+}

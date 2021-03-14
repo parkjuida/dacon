@@ -80,6 +80,6 @@ def evaluate_with_submission_cnn(q, train, cnn, selector, days):
         test_y = test_y_df["TARGET"].values
         pred_y = cnn.predict(test_x.values.reshape(-1, days, 48, test_x.shape[-1])).reshape(-1)
 
-        error += np.sum(np.max(q * (test_y - pred_y), (q - 1) * (test_y - pred_y)))
+        error += np.sum(np.maximum(q * (test_y - pred_y), (q - 1) * (test_y - pred_y)))
 
     return error

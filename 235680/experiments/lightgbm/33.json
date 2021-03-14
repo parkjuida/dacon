@@ -1,0 +1,37 @@
+{
+    "columns": [
+        "0_TARGET",
+        "0_T",
+        "0_RH",
+        "1_TARGET",
+        "1_T",
+        "1_RH",
+        "2_TARGET",
+        "2_T",
+        "2_RH",
+        "3_TARGET",
+        "3_T",
+        "3_RH",
+        "4_TARGET",
+        "4_T",
+        "4_RH"
+    ],
+    "days": 5,
+    "params": {
+        "application": "quantile",
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "num_leaves": 16,
+        "n_jobs": 20,
+        "seed": 42,
+        "bagging_freq": 50,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "drop_rate": 0.2,
+        "early_stopping_round": 10,
+        "boosting": "gbdt"
+    },
+    "total_error": 3.1468560176567566,
+    "submission": 7.98,
+    "total_submission_error": 1.1827935041036706
+}

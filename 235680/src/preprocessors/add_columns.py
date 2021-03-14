@@ -28,12 +28,26 @@ def add_rolling_mean(df: pd.DataFrame, column, rows) -> pd.DataFrame:
     return df
 
 
-def add_rolling_mean_bulk(df:pd.DataFrame, column) -> pd.DataFrame:
+def add_rolling_mean_bulk(df: pd.DataFrame, column) -> pd.DataFrame:
     df[f"{column}_rolling_mean_4"] = df[column].rolling(4).mean()
     df[f"{column}_rolling_mean_8"] = df[column].rolling(8).mean()
     df[f"{column}_rolling_mean_12"] = df[column].rolling(12).mean()
     df[f"{column}_rolling_mean_24"] = df[column].rolling(24).mean()
     df[f"{column}_rolling_mean_48"] = df[column].rolling(48).mean()
+    df[f"{column}_rolling_mean_64"] = df[column].rolling(64).mean()
+    df[f"{column}_rolling_mean_96"] = df[column].rolling(96).mean()
+
+    return df
+
+
+def add_rolling_std_bulk(df: pd.DataFrame, column) -> pd.DataFrame:
+    df[f"{column}_rolling_std_4"] = df[column].rolling(4).std()
+    df[f"{column}_rolling_std_8"] = df[column].rolling(8).std()
+    df[f"{column}_rolling_std_12"] = df[column].rolling(12).std()
+    df[f"{column}_rolling_std_24"] = df[column].rolling(24).std()
+    df[f"{column}_rolling_std_48"] = df[column].rolling(48).std()
+    df[f"{column}_rolling_std_64"] = df[column].rolling(64).std()
+    df[f"{column}_rolling_std_96"] = df[column].rolling(96).std()
 
     return df
 

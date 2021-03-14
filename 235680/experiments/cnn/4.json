@@ -1,0 +1,10 @@
+{
+    "columns": [
+        "DHI",
+        "TARGET"
+    ],
+    "days": 2,
+    "total_error": 7.699090252214128e-05,
+    "submission": 7.98,
+    "total_submission_error": 1.0058643272682495
+}

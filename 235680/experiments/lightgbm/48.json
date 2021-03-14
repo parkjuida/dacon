@@ -1,0 +1,29 @@
+{
+    "columns": [
+        "0_DHI",
+        "0_DNI",
+        "0_TARGET",
+        "1_DHI",
+        "1_DNI",
+        "1_TARGET"
+    ],
+    "days": 2,
+    "params": {
+        "application": "quantile",
+        "learning_rate": 0.05,
+        "max_depth": -1,
+        "num_leaves": 1000,
+        "n_jobs": 20,
+        "seed": 42,
+        "bagging_freq": 10,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "drop_rate": 0.2,
+        "early_stopping_round": 10,
+        "boosting": "gbdt"
+    },
+    "total_error": 2.431709121126176,
+    "submission": 7.98,
+    "total_submission_error": 1.0854159000129555,
+    "split_ratio": 0.8
+}

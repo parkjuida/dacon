@@ -137,6 +137,78 @@ class Convolution2DVarious(tf.keras.Model):
         return net
 
 
+class Convolution2DVarious2(tf.keras.Model):
+    name = "Convolution_2D_various"
+
+    def __init__(self, days, output_steps, num_features):
+        super().__init__()
+        self.conv_input = tf.keras.layers.Lambda(lambda x: tf.reshape(x, (-1, days, 48, num_features)))
+        self.conv_days_input = tf.keras.layers.Lambda(lambda x: tf.transpose(x, (0, 1, 3, 2)))
+        self.conv_days_input_1 = tf.keras.layers.Lambda(lambda x: x[:, -1:, :, :])
+        self.conv_days_input_2 = tf.keras.layers.Lambda(lambda x: x[:, :, :, :])
+
+        self.conv_hours_input = tf.keras.layers.Lambda(lambda x: tf.transpose(x, (0, 2, 3, 1)))
+        self.conv_hours_input_1 = tf.keras.layers.Lambda(lambda x: x[:, -1:, :, -1:])
+        self.conv_hours_input_2 = tf.keras.layers.Lambda(lambda x: x[:, -2:, :, -1:])
+        self.conv_hours_input_3 = tf.keras.layers.Lambda(lambda x: x[:, -4:, :, -1:])
+        self.conv_hours_input_4 = tf.keras.layers.Lambda(lambda x: x[:, -8:, :, -1:])
+        self.conv_hours_input_5 = tf.keras.layers.Lambda(lambda x: x[:, -24:, :, -1:])
+        self.conv_hours_input_6 = tf.keras.layers.Lambda(lambda x: x[:, -48:, :, -1:])
+
+        self.conv_days_1 = tf.keras.layers.Conv2D(16, kernel_size=(1, num_features), activation="relu")
+        self.conv_days_2 = tf.keras.layers.Conv2D(32, kernel_size=(days, num_features), activation="relu")
+
+        self.conv_days_1_1 = tf.keras.layers.Conv2D(4, kernel_size=(1, 1), activation="relu")
+        self.conv_days_2_1 = tf.keras.layers.Conv2D(4, kernel_size=(1, 1), activation="relu")
+
+        self.conv_hours_1 = tf.keras.layers.Conv2D(4, kernel_size=(1, num_features), activation="relu")
+        self.conv_hours_2 = tf.keras.layers.Conv2D(4, kernel_size=(2, num_features), activation="relu")
+        self.conv_hours_3 = tf.keras.layers.Conv2D(8, kernel_size=(4, num_features), activation="relu")
+        self.conv_hours_4 = tf.keras.layers.Conv2D(8, kernel_size=(8, num_features), activation="relu")
+        self.conv_hours_5 = tf.keras.layers.Conv2D(16, kernel_size=(24, num_features), activation="relu")
+        self.conv_hours_6 = tf.keras.layers.Conv2D(16, kernel_size=(48, num_features), activation="relu")
+
+        self.conv_hours_1_1 = tf.keras.layers.Conv2D(2, kernel_size=(1, 1), activation="relu")
+        self.conv_hours_2_1 = tf.keras.layers.Conv2D(2, kernel_size=(1, 1), activation="relu")
+        self.conv_hours_3_1 = tf.keras.layers.Conv2D(8, kernel_size=(1, 1), activation="relu")
+        self.conv_hours_4_1 = tf.keras.layers.Conv2D(8, kernel_size=(1, 1), activation="relu")
+        self.conv_hours_5_1 = tf.keras.layers.Conv2D(16, kernel_size=(1, 1), activation="relu")
+        self.conv_hours_6_1 = tf.keras.layers.Conv2D(16, kernel_size=(1, 1), activation="relu")
+
+        self.dense = tf.keras.layers.Dense(output_steps * 1, kernel_initializer=tf.initializers.zeros)
+        self.output_layer = tf.keras.layers.Reshape([output_steps, 1])
+
+    def get_config(self):
+        pass
+
+    def call(self, inputs, training=None, mask=None):
+        x = self.conv_input(inputs)
+        # conv_days_1 = self.conv_days_1_1(self.conv_days_1(self.conv_days_input_1(self.conv_days_input(x))))
+        conv_days_2 = self.conv_days_2_1(self.conv_days_2(self.conv_days_input_2(self.conv_days_input(x))))
+
+        # conv_hours_1 = self.conv_hours_1_1(self.conv_hours_1(self.conv_hours_input_1(self.conv_hours_input(x))))
+        # conv_hours_2 = self.conv_hours_2_1(self.conv_hours_2(self.conv_hours_input_2(self.conv_hours_input(x))))
+        conv_hours_3 = self.conv_hours_3_1(self.conv_hours_3(self.conv_hours_input_3(self.conv_hours_input(x))))
+        conv_hours_4 = self.conv_hours_4_1(self.conv_hours_4(self.conv_hours_input_4(self.conv_hours_input(x))))
+        conv_hours_5 = self.conv_hours_5_1(self.conv_hours_5(self.conv_hours_input_5(self.conv_hours_input(x))))
+        conv_hours_6 = self.conv_hours_6_1(self.conv_hours_6(self.conv_hours_input_6(self.conv_hours_input(x))))
+
+        net = tf.concat(axis=-1, values=[
+            # conv_days_1,
+            conv_days_2,
+            # conv_hours_1,
+            # conv_hours_2,
+            conv_hours_3,
+            conv_hours_4,
+            conv_hours_5,
+            conv_hours_6,
+        ])
+        net = self.dense(net)
+        net = self.output_layer(net)
+
+        return net
+
+
 class ConvolutionVarious(tf.keras.Model):
     name = "Convolution_various"
 

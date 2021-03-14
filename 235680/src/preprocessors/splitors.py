@@ -7,19 +7,19 @@ def split_train_valid_test_for_cv(df, ratio):
     boundary = {
         0.6: [(slice(0, int(length * 0.6)), slice(int(length * 0.6), int(length * 0.9)),
                slice(int(length * 0.9), int(length * 1.0))),
-              (slice(int(length * 0.1), int(length * 0.7)), slice(int(length * 0.7), int(length * 1)),
-               slice(int(length * 0), int(length * 0.1))),
-              (slice(int(length * 0.3), int(length * 0.9)), slice(int(length * 0.9), int(length * 1)),
-               slice(int(length * 0), int(length * 0.3))),
+              # (slice(int(length * 0.1), int(length * 0.7)), slice(int(length * 0.7), int(length * 1)),
+              #  slice(int(length * 0), int(length * 0.1))),
+              # (slice(int(length * 0.3), int(length * 0.9)), slice(int(length * 0.9), int(length * 1)),
+              #  slice(int(length * 0), int(length * 0.3))),
               (slice(int(length * 0.4), int(length * 1)), slice(int(length * 0), int(length * 0.3)),
                slice(int(length * 0.3), int(length * 0.4))),
               ],
         0.8: [
-            (slice(0, int(length * 0.8)), slice(int(length * 0.8), int(length * 0.9)),
+            (slice(0, int(length * 0.8)), slice(int(length * 0.8), int(length * 1.0)),
              slice(int(length * 0.9), int(length * 1.0))),
-            (slice(int(length * 0.1), int(length * 0.9)), slice(int(length * 0.9), int(length * 1)),
-             slice(int(length * 0), int(length * 0.1))),
-            (slice(int(length * 0.2), int(length * 1)), slice(int(length * 0), int(length * 0.1)),
+            # (slice(int(length * 0.1), int(length * 0.9)), slice(int(length * 0.9), int(length * 1)),
+            #  slice(int(length * 0), int(length * 0.1))),
+            (slice(int(length * 0.2), int(length * 1)), slice(int(length * 0), int(length * 0.2)),
              slice(int(length * 0.1), int(length * 0.2))),
         ],
         0.5: [
@@ -27,6 +27,10 @@ def split_train_valid_test_for_cv(df, ratio):
              slice(int(length * 0.8), int(length * 1.0))),
             (slice(int(length * 0.5), int(length * 1)), slice(int(length * 0), int(length * 0.3)),
              slice(int(length * 0.3), int(length * 0.5))),
+        ],
+        0.7: [
+            (slice(0, int(length * 0.7)), slice(int(length * 0.7), int(length * 0.9)),
+             slice(int(length * 0.9), int(length * 1.0)))
         ]
     }
 

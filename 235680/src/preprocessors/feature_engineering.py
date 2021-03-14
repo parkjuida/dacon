@@ -1,4 +1,5 @@
-from src.preprocessors.add_columns import add_ghi, add_sin_cos_day, add_sin_cos_hour, add_rolling_mean_bulk, add_rh_t
+from src.preprocessors.add_columns import add_ghi, add_sin_cos_day, add_sin_cos_hour, add_rolling_mean_bulk, add_rh_t, \
+    add_rolling_std_bulk
 
 
 def feature_engineering_lightgbm(df):
@@ -9,6 +10,11 @@ def feature_engineering_lightgbm(df):
     df = add_rolling_mean_bulk(df, "DHI")
     df = add_rolling_mean_bulk(df, "DNI")
     df = add_rolling_mean_bulk(df, "GHI")
+    df = add_rolling_mean_bulk(df, "T")
+    df = add_rolling_mean_bulk(df, "RH")
+    df = add_rolling_std_bulk(df, "TARGET")
+    df = add_rolling_std_bulk(df, "T")
+    df = add_rolling_std_bulk(df, "RH")
     df = add_rh_t(df)
     df.dropna()
 
@@ -23,6 +29,11 @@ def feature_engineering_cnn(df):
     df = add_rolling_mean_bulk(df, "DHI")
     df = add_rolling_mean_bulk(df, "DNI")
     df = add_rolling_mean_bulk(df, "GHI")
+    df = add_rolling_mean_bulk(df, "T")
+    df = add_rolling_mean_bulk(df, "RH")
+    df = add_rolling_std_bulk(df, "TARGET")
+    df = add_rolling_std_bulk(df, "T")
+    df = add_rolling_std_bulk(df, "RH")
     df = add_rh_t(df)
     df.dropna()
 
